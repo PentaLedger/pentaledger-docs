@@ -25,7 +25,7 @@ jobs:
 
       - name: Build PDF documentation
         run: |
-          sphinx-build -b pdf source build/pdf  # Adjust paths if necessary
+          sphinx-build -b pdf src/users_guide build/pdf  
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v2
@@ -39,6 +39,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Download PDF artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: documentation-pdf  # This will download the artifact from the previous step
 
       - name: Create Release and Upload PDF
         uses: ncipollo/release-action@v1
